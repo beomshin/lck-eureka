@@ -1,5 +1,13 @@
 server:
   port: 22301
+  shutdown: graceful
+
+
+spring:
+  security:
+    user:
+      name: admin
+      password: $2a$10$BVhva6MLZ0HviRX4c/L1I.nOuN86IWdfP7eA2vyQFjs1Eyw5.YyY6
 
 eureka:
   client:

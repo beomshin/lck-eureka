@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.token.TokenService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -16,6 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 @Slf4j
 public class SecurityConfig {
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public AuthenticationEntryPoint authenticationEntryPoint() {
@@ -33,8 +40,9 @@ public class SecurityConfig {
 
             http
                     .csrf().disable()
-                    .authorizeRequests()
-                    .anyRequest().permitAll()
+                    .authorizeRequests().antMatchers("/encrypt_pw").permitAll()
+                    .anyRequest()
+                    .authenticated()
                     .and()
                     .httpBasic()
                     ;
