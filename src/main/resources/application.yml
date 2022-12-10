@@ -4,14 +4,11 @@ server:
 
 
 spring:
+  profiles:
+    active: local
+  application:
+    name: lck-eureka
   security:
     user:
       name: admin
       password: $2a$10$BVhva6MLZ0HviRX4c/L1I.nOuN86IWdfP7eA2vyQFjs1Eyw5.YyY6
-
-eureka:
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://admin:admin@localhost:${server.port}/eureka/
